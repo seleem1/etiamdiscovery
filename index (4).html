@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Etiam Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 1em;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #00bfff;
+            font-weight: 700;
+        }
+
+        nav {
+            background-color: #1a1a1a;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav a {
+            color: #f5f5f5;
+            text-decoration: none;
+            margin: 0 1em;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 5px;
+            background-color: #00bfff;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        nav a:hover {
+            background-color: #009acd;
+            transform: scale(1.1);
+        }
+
+        section {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 1em;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        footer {
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+            text-align: center;
+            padding: 1em 0;
+            font-size: 0.9em;
+        }
+
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        .faq {
+            background-color: #1a1a1a;
+            padding: 1em;
+            border-radius: 8px;
+            margin-top: 2em;
+        }
+
+        .faq h3 {
+            color: #00bfff;
+        }
+
+        .faq p {
+            font-size: 1em;
+        }
+
+        .faq p,
+        .faq h3 {
+            color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Asteroid Etiam Tracker</h1>
+    </header>
+    <nav>
+        <a href="#estimated-impact" onclick="showPage('estimated-impact')">Etiam Estimated Time of Impact</a>
+        <a href="#bunker" onclick="showPage('bunker')">Bunker Locator</a>
+        <a href="#protection-plan" onclick="showPage('protection-plan')">Protection Plan</a>
+        <a href="#faq" onclick="showPage('faq')">FAQ</a>
+    </nav>
+
+    <!-- Etiam Estimated Time of Impact Section -->
+    <section id="estimated-impact" class="page">
+        <h2 class="center">Etiam Estimated Time of Impact</h2>
+        <p class="center">Stay informed about the trajectory and expected impact of Asteroid Etiam. The impact is expected in 6 months.</p>
+        <div class="center">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvLo8hIftAuHDPmR9RYOMzDScKI_2aS9yHag&s"
+                alt="Asteroid Image" style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+        <div id="countdown" class="center"></div>
+    </section>
+
+    <!-- Protection Plan Section -->
+    <section id="protection-plan" class="page" style="display: none;">
+        <h2 class="center">The Protection Plan Against Asteroid Etiam</h2>
+        <p class="center">Asteroid Etiam is expected to hit Earth in 6 months. Scientists are working to develop solutions to deflect or neutralize the threat. Below are key points regarding the asteroid and potential solutions:</p>
+
+        <h3>The Danger of Asteroid Etiam</h3>
+        <p>Asteroid Etiam has been identified as a potential extinction-level threat to Earth. It is much larger and faster than the asteroid that caused the mass extinction of the dinosaurs. The asteroid’s mass and speed will result in an impact that could cause significant destruction to the planet. Scientists are exploring various methods to change its trajectory to prevent catastrophe.</p>
+
+        <h3>Comparison to Past Impacts</h3>
+        <p>Similar to the Chelyabinsk asteroid impact in 2013, Etiam’s impact speed is very high. However, Etiam’s size is much larger, which will lead to a significantly more destructive force. Past impacts, like the one that caused the extinction of the dinosaurs, have demonstrated the catastrophic potential of such events.</p>
+
+        <h3>Deflection Solutions</h3>
+        <h4>1. Rocket Deflection</h4>
+        <p>One potential solution involves using rockets to hit the asteroid and change its trajectory. This approach relies on Newton’s laws of motion, where a force applied to the asteroid will change its velocity and path. The rocket impacts would apply a force opposite to the asteroid's direction, altering its course.</p>
+
+        <h4>2. Gravity Tractor</h4>
+        <p>The gravity tractor involves sending a spacecraft to orbit around the asteroid. By using the spacecraft's gravitational pull, the asteroid would be slowly moved off its course. This method would require a great deal of time and precision, but could potentially avert disaster.</p>
+
+        <h4>3. Lasers</h4>
+        <p>Lasers could be used to heat the asteroid’s surface, causing it to eject material and alter its trajectory. This would involve focusing powerful laser beams on specific areas of the asteroid to create a propulsion force through the ejection of gas and debris.</p>
+
+        <p>These solutions are being evaluated for feasibility, taking into account the asteroid's size, speed, and available technology.</p>
+    </section>
+
+    <!-- Bunker Locator Section -->
+    <section id="bunker" class="page" style="display: none;">
+        <h2 class="center">Bunker Locator</h2>
+        <p class="center">Explore nearby bunkers for safety in case of emergency.</p>
+        <div id="map"></div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="page" style="display: none;">
+        <h2 class="center">FAQ</h2>
+        <div class="faq">
+            <h3>What is Asteroid Etiam?</h3>
+            <p>Asteroid Etiam is a massive asteroid capable of destroying most life on Earth. Efforts are underway to deflect or neutralize it.</p>
+
+            <h3>What are the criteria for success in deflecting or neutralizing Asteroid Etiam?</h3>
+            <p>Criteria include deflecting Etiam or neutralizing it with solutions that are cost-effective and efficient under constraints.</p>
+
+            <h3>What are the constraints for the solutions?</h3>
+            <p>Constraints include time, budget, testing, and resources. Efforts must work within these limitations to succeed.</p>
+
+            <h3>What solutions are being considered to deflect or neutralize the asteroid?</h3>
+            <p>Possible solutions include rockets for deflection, gravitational tractors, or heating with lasers, all leveraging Newton's laws.</p>
+
+            <h3>What is the speed of Asteroid Etiam?</h3>
+            <p>The speed of Asteroid Etiam is approximately 25 km/s.</p>
+
+            <h3>What is the mass of Asteroid Etiam?</h3>
+            <p>The mass of Asteroid Etiam is approximately 1.2 × 10<sup>12</sup> kg.</p>
+
+            <h3>What is the size of Asteroid Etiam?</h3>
+            <p>Asteroid Etiam has a diameter of 1.5 kilometers.</p>
+
+            <h3>When is Asteroid Etiam expected to impact Earth?</h3>
+            <p>Asteroid Etiam is expected to impact Earth in 6 months from now. Efforts are underway to prevent the impact.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Asteroid Etiam Tracker. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Countdown Logic
+        const countdownElement = document.getElementById('countdown');
+        const asteroidDate = new Date();
+        asteroidDate.setMonth(asteroidDate.getMonth() + 6);
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeDiff = asteroidDate - now;
+
+            if (timeDiff <= 0) {
+                countdownElement.innerText = "Asteroid Etiam has passed!";
+                return;
+            }
+
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+            const seconds = Math.floor((timeDiff / 1000) % 60);
+
+            countdownElement.innerText = `Time Remaining: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+        }
+
+        setInterval(updateCountdown, 1000);
+
+        // Navigation Logic
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
+        }
+
+        // Leaflet Map Logic
+        const map = L.map('map').setView([20, 0], 2); // Centered globally
+
+        // Add OpenStreetMap tiles (we add a tile layer here)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Bunkers (markers)
+        const bunkers = [
+            { lat: 40.7128, lon: -74.0060, name: "New York Bunker" },
+            { lat: 34.0522, lon: -118.2437, name: "Los Angeles Bunker" },
+            { lat: 51.5074, lon: -0.1278, name: "London Bunker" },
+            { lat: 48.8566, lon: 2.3522, name: "Paris Bunker" },
+            { lat: 30.0444, lon: 31.2357, name: "Cairo Bunker" }, // Cairo Bunker
+            // Additional bunkers (up to 80) below
+            { lat: -33.8688, lon: 151.2093, name: "Sydney Bunker" },
+            { lat: 35.6762, lon: 139.6503, name: "Tokyo Bunker" },
+            { lat: -22.9068, lon: -43.1729, name: "Rio de Janeiro Bunker" },
+            { lat: -34.6037, lon: -58.3816, name: "Buenos Aires Bunker" },
+            { lat: 48.2082, lon: 16.3738, name: "Vienna Bunker" },
+            { lat: 52.5200, lon: 13.4050, name: "Berlin Bunker" },
+            // Add more bunkers for other locations as requested
+        ];
+
+        bunkers.forEach(function(bunker) {
+            L.marker([bunker.lat, bunker.lon]).addTo(map).bindPopup(`<b>${bunker.name}</b>`);
+        });
+
+        // Shelters (with a different color icon)
+        const shelterIcon = L.icon({
+            iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Red_Circle.svg',
+            iconSize: [15, 15]
+        });
+
+        const shelters = [
+            { lat: 41.9028, lon: 12.4964, name: "Rome Shelter" },
+            { lat: 40.7306, lon: -73.9352, name: "Berlin Shelter" },
+            { lat: 52.3676, lon: 4.9041, name: "Amsterdam Shelter" },
+            { lat: 34.0522, lon: -118.2437, name: "Los Angeles Shelter" },
+            // More shelters can be added similarly
+        ];
+
+        shelters.forEach(function(shelter) {
+            L.marker([shelter.lat, shelter.lon], { icon: shelterIcon }).addTo(map).bindPopup(`<b>${shelter.name}</b>`);
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
